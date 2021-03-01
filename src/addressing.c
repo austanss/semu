@@ -43,11 +43,6 @@ void addressing_map_device(struct addressable_device *device)
 void addressing_create_address_space()
 {
     addressing_create_device_list();
-    struct addressable_device *ram_device = malloc(sizeof(struct addressable_device));
-    ram_device->start_address = 0x0;
-    ram_device->end_address = 0x0 + 16 * 1024 * 1024;
-    ram_device->device = ram;
-    addressing_map_device(ram_device);
 }
 
 uint8_t address_read_byte(uint64_t address)
@@ -86,4 +81,22 @@ void address_write_byte(uint64_t address, uint8_t value)
     uint64_t device_data_index = address - addressed_device->device->start_address;    
 
     addressed_device->device->device[device_data_index] = value;
+}
+
+uint16_t address_read_word(uint64_t address)
+{
+    uint16_t word = 0;
+    word = (address_read_byte(address) << 8);
+    word &= (address_read_byte(address + 1));
+    return word;
+}
+
+uint32_t address_read_dword(uint64_t address)
+{
+    uint16_t dword = 0;
+    dword = (address_read_byte(address) << 24);
+    dword &= (address_read_byte(address + 1) << 16);
+    dword &= (address_read_byte(address + 2) << 8);
+    dword &= (address_read_byte(address + 3));
+    return dword;
 }
