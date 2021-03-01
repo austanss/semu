@@ -1,0 +1,8 @@
+.vscode/
+.cache/
+.idea/
+.vs/
+bin/
+*bios*
+*bios*/
+compile_commands.json
