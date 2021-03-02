@@ -87,16 +87,16 @@ uint16_t address_read_word(uint64_t address)
 {
     uint16_t word = 0;
     word = (address_read_byte(address) << 8);
-    word &= (address_read_byte(address + 1));
+    word |= (address_read_byte(address + 1));
     return word;
 }
 
 uint32_t address_read_dword(uint64_t address)
 {
-    uint16_t dword = 0;
+    uint32_t dword = 0;
     dword = (address_read_byte(address) << 24);
-    dword &= (address_read_byte(address + 1) << 16);
-    dword &= (address_read_byte(address + 2) << 8);
-    dword &= (address_read_byte(address + 3));
+    dword |= (address_read_byte(address + 1) << 16);
+    dword |= (address_read_byte(address + 2) << 8);
+    dword |= (address_read_byte(address + 3));
     return dword;
 }
