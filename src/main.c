@@ -47,7 +47,7 @@ int main(int argc, char** argv)
 
     do
     {
-        execute_instruction(((uint64_t)address_read_dword(registers[mrp]) << 32) & address_read_dword(registers[mrp] + 4));
+        execute_instruction(((uint64_t)address_read_dword(registers[mrp]) << 32) | address_read_dword(registers[mrp] + 4));
         registers[mrp] += 8;
     } while (true);
     
