@@ -1,1 +1,3 @@
-# sasm
+# semu
+
+It actually does work. Just have to find a program to run it with...
